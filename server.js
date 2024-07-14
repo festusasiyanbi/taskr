@@ -1,6 +1,13 @@
 import app from "./backend/express.js";
+import express from "express";
 import config from "./dbconfig/config.js";
 import mongoose from "mongoose";
+import path from "path";
+import { fileURLToPath } from "url";
+
+// The 2 lines gets the path name to the root directory so as to avoid ES module error
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 mongoose.Promise = global.Promise;
 
@@ -21,3 +28,11 @@ mongoose.connection.on('error', err => {
     console.error('MongoDB error:', err.message);
     process.exit(1);
 });
+
+// Below, we are telling the express app to treat the file as a static page
+app.use(express.static(path.join(__dirname, "./frontend/dist/")));
+
+// This will display the index.html file in our frontend to user whenever they visit the server
+app.get(("*"), (req, res) => {
+    res.sendFile(path.join(__dirname, "./frontend/dist/index.html"));
+})
