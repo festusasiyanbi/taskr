@@ -1,6 +1,6 @@
 import app from "./backend/express.js";
 import express from "express";
-import config from "./dbconfig/config.js";
+import config from "./backend/dbconfig/config.js";
 import mongoose from "mongoose";
 import path from "path";
 import { fileURLToPath } from "url";
