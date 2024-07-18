@@ -1,12 +1,13 @@
-import './index.css'
+import React from 'react';
+import './index.css';
+import Login from './user/Login.jsx';
 
 function App() {
-
   return (
     <div>
-      This is a new react app
+      <Login />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
