@@ -1,11 +1,9 @@
 import React from 'react';
-import './index.css';
-import Login from './user/Login.jsx';
 
 function App() {
   return (
     <div>
-      <Login />
+      <h1>This is the landing page, please do not render any component here.</h1>
     </div>
   );
 }

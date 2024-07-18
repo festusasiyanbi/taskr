@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './Login.css';  // Importando o CSS
+import '../styles/login.css'
 
 const Login = () => {
   const [username, setUsername] = useState('');

@@ -12,12 +12,13 @@ const __dirname = path.dirname(__filename);
 
 mongoose.Promise = global.Promise;
 
+app.use('/api/auth', authRoutes);
 mongoose.connect("mongodb+srv://festusasiyanbi:Festus%40taskr@taskr.rxfwujx.mongodb.net/?retryWrites=true&w=majority&appName=taskr")
   .then(() => {
     console.log("MongoDB connected successfully");
 
-    // Add auth rout
-    app.use('/api/auth', authRoutes);
+    // Add auth route
+    
 
     app.listen(config.port, () => {
       console.log(`App is connected to the database & running on port ${config.port}!`);
