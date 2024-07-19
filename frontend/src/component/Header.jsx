@@ -3,7 +3,7 @@ import { DiAtom } from "react-icons/di";
 
 const Header = () => {
   return (
-    <header className="h-[8%] w-full  justify-between items-right p-6  ">
+    <header className="header w-full  justify-between items-right p-6  ">
       <div className="text-9xl font-bold flex items-center">
         <DiAtom className="mr-2" /> ............
       </div>

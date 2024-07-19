@@ -3,8 +3,34 @@
   height: 100%;
   background-color: rgb(29, 40, 49);
   border-top-right-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-top: 1em;
+}
+.tasks {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  height: 100%;
 }
 .custom-text {
   color: white;
   font-size: 14px;
+  text-decoration: none;
+}
+.active {
+  color: violet;
+}
+
+.task-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 98%;
+  height: 100%;
+  column-gap: 20px;
 }
