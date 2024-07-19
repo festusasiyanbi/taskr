@@ -1,0 +1,10 @@
+.navbar-container {
+  width: 10%;
+  height: 100%;
+  background-color: rgb(29, 40, 49);
+  border-top-right-radius: 15px;
+}
+.custom-text {
+  color: white;
+  font-size: 14px;
+}
