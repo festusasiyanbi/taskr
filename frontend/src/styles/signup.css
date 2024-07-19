@@ -26,10 +26,11 @@
     margin-top: 10px;
   }
   
-  userForm .inputs input{
+  .userForm .inputs input{
     margin-top: 5px;
     padding: 10px;
-    background-color: rgb(12, 11, 11);
+    background-color: white;
+    color: black;
   }
   
   .inputs button{
