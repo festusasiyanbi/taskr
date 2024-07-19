@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles/login.css'
+import Layout from '../component/Layout';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -18,6 +19,7 @@ const Login = () => {
   };
 
   return (
+    <Layout>
     <div className="login-container">
       <div className="login-form">
         <h2>Login</h2>
@@ -43,6 +45,7 @@ const Login = () => {
         </form>
       </div>
     </div>
+    </Layout>
   );
 };
 
