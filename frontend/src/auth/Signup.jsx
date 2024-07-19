@@ -25,12 +25,12 @@ const Signup = () => {
             autocomplete='off'
             placeholder='Enter your password'
             />
-            <button type="submit"  color='purple'>SignUp</button>
+            <button type="submit"  >SignUp</button>
         </div>
       </form>
       <div className='login'>
         <p>Already have an account? </p>
-        <Link to ="/login" type="submit" class="btn btn-success">Login</Link>
+        <Link to ="/login" type="submit" class="btn btn-dark">Login</Link>
       </div>
     </div>
     
