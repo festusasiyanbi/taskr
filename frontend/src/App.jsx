@@ -1,10 +1,16 @@
 import React from 'react';
+import Layout from './component/Layout';
+import Home from './home/Home';
+
 
 function App() {
   return (
-    <div>
-      <h1>This is the landing page, please do not render any component here.</h1>
+    <div className="bg-cover bg-center min-h-screen flex flex-col" style={{ backgroundImage: "url('/img.jpeg')" }}>
+     <Layout>
+       <Home />
+     </Layout>
     </div>
+  
   );
 }
 
