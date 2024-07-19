@@ -9,14 +9,7 @@
   justify-content: flex-start;
   padding-top: 1em;
 }
-.tasks {
-  width: 90%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-  height: 100%;
-}
+
 .custom-text {
   color: white;
   font-size: 14px;
@@ -33,4 +26,39 @@
   width: 98%;
   height: 100%;
   column-gap: 20px;
+}
+.task-manager {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+}
+.task-top-stack {
+  padding: 5px;
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  justify-content: space-between;
+}
+.task-top-stack > .add-task {
+  width: 120px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tasks {
+  height: 90%;
+}
+.task-top-stack > input {
+  width: 60%;
+}
+.searchBtn {
+  width: 30px;
+  height: 40px;
+  border-radius: 10px;
 }

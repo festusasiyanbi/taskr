@@ -1,7 +1,7 @@
 import React from "react";
-import "../styles/profile.css";
+
 const Tasks = () => {
-  return <div className="tasks">Taskapp</div>;
+  return <div className="tasks">Tasks</div>;
 };
 
 export default Tasks;
