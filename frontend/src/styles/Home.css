@@ -1,4 +1,21 @@
-.custom-text-size {
-    font-size: 10rem; 
-    line-height: 1;
-  }
+.home {
+  background: linear-gradient(to right, rgb(12, 13, 50), black);
+  color: white;
+  padding: 100px 0;
+}
+.display-3 {
+  font-weight: 700;
+}
+.search-box {
+  display: flex;
+  margin-top: 20px;
+}
+.search-box input {
+  flex: 1;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.search-box button {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}

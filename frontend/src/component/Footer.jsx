@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
+import '../styles/Footer.css';
+import '../styles/Common.css'; 
 
 const Footer = () => {
   return (
-    <div>
-      <p className="h-[7%] text-black">
-        &copy; 2024 Your Company. All rights reserved.
-      </p>
-    </div>
+    <footer className="footer  text-white py-0">
+      <p className="text-center mb-0">© 2024 CODE FUSION. All rights reserved.</p>
+    </footer>
   );
-};
+}
 
 export default Footer;

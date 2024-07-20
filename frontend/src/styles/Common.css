@@ -1,0 +1,5 @@
+.background-gradient {
+    background: linear-gradient(to right, rgb(12, 13, 50), black);
+    color: white;
+  }
+  
