@@ -1,6 +1,6 @@
 import React from "react";
-import Layout from "./component/Layout";
-import Home from "./component/Home";
+import Layout from "./components/Layout";
+import Home from "./components/Home";
 
 function App() {
   return (

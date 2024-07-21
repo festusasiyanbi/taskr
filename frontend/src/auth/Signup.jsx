@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/signup.css";
 import { Link } from "react-router-dom";
-import Layout from "../component/Layout";
+import Layout from "../components/Layout";
 
 const Signup = () => {
   return (

@@ -3,6 +3,7 @@ import "../styles/profile.css";
 import Container from "react-bootstrap/esm/Container";
 import Tasks from "./Tasks";
 import { PiMagnifyingGlassBold } from "react-icons/pi";
+
 const TaskManager = () => {
   const [toggle, setToggle] = useState(false);
 

@@ -5,7 +5,7 @@ import '../styles/Common.css';
 
 const Header = () => {
   return (
-    <Navbar expand="lg" className="background-gradient py-3">
+    <Navbar expand="lg" className="header background-gradient py-3">
     <Navbar.Brand href="#" className="d-flex align-items-center">
       <img src="/logo.jpeg" height="40" className="d-inline-block align-top mr-2" alt="Logo" />
       <span className="text-white">CODE FUSION TEAM</span>
