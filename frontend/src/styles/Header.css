@@ -1,9 +1,11 @@
-
-  .nav-link {
-    color: #fff !important;
-  }
-  .btn-primary {
-    background-color: #4e50f7 !important;
-    border-color: #4e50f7 !important;
-  }
-  
+.header {
+  height: 8%;
+  display: flex;
+}
+.nav-link {
+  color: #fff !important;
+}
+.btn-primary {
+  background-color: #4e50f7 !important;
+  border-color: #4e50f7 !important;
+}

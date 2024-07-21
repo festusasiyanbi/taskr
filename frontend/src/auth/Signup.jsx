@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/signup.css";
+import "../index.css";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 

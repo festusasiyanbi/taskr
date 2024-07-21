@@ -1,11 +1,11 @@
 .navbar-container {
-  width: 10%;
+  width: 15%;
   height: 100%;
   background-color: rgb(29, 40, 49);
   border-top-right-radius: 15px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
   padding-top: 1em;
 }
@@ -16,7 +16,7 @@
   text-decoration: none;
 }
 .active {
-  color: violet;
+  color: #6200ea;
 }
 
 .task-wrapper {
@@ -35,6 +35,9 @@
   flex-direction: column;
   height: 100%;
 }
+.task-manager button {
+  border-radius: 7px;
+}
 .task-top-stack {
   padding: 5px;
   border-radius: 10px;
@@ -43,6 +46,9 @@
   align-items: center;
   background-color: white;
   justify-content: space-between;
+}
+.task-top-stack h4 {
+  padding-left: 10px;
 }
 .operation-wrapper {
   transition: opacity 3s ease-in-out;
@@ -67,7 +73,6 @@
   border-radius: 7px;
   transition: opacity 3s ease-in-out;
 }
-
 .operation-wrapper > input::placeholder {
   color: black;
 }
@@ -97,7 +102,7 @@
   column-gap: 15px;
 }
 .tasks {
-  height: 90%;
+  height: 85%;
   width: 100%;
   padding: 10px;
 }
@@ -111,8 +116,14 @@
 .status-div {
   display: flex;
   flex-direction: column;
+  align-items: center;
   row-gap: 5px;
   width: 15%;
+}
+.status-div button {
+  background-color: transparent;
+  color: black;
+  font-style: oblique;
 }
 .status-div span:first-child {
   font-style: italic;
@@ -122,4 +133,45 @@
 .status-div div {
   height: 1px;
   width: 100%;
+}
+.status-type {
+  text-transform: capitalize;
+}
+.task-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: center;
+  margin: 2em 0;
+  gap: 10px;
+}
+.task-container button {
+  width: 100%;
+}
+.task-card {
+  width: 24%;
+  min-height: 250px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 10px 7px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.task-type {
+  text-transform: capitalize;
+  font-size: 9px;
+  padding: 2px;
+  color: white;
+  border-radius: 5px;
+}
+.task-title {
+  font-size: larger;
+  font-weight: bold;
+  margin: 5px 0;
+}
+.task-description {
+  color: gray;
+  font-size: 14px;
 }
