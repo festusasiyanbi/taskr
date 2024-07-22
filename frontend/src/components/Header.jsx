@@ -12,7 +12,7 @@ const Header = () => {
         <span>CODEFUSION</span>
       </Navbar.Brand>
       <Nav className="nav">
-        <Nav.Link href="/home" className="nav-link ml-3 text-white">Home</Nav.Link>
+        <Nav.Link href="/" className="nav-link ml-3 text-white">Home</Nav.Link>
         <Nav.Link href="/about" className="nav-link ml-3 text-white">About</Nav.Link>
         <Nav.Link href="/contact" className="nav-link ml-3 text-white">Contact</Nav.Link>
         <Nav.Link href="/login" className="nav-link">
