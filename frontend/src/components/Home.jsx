@@ -1,18 +1,10 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
-import "../styles/Home.css";
+import { Container, Row, Col} from "react-bootstrap";
+import "../styles/home.css";
+import "../index.css"
 
 const Home = () => {
-  const [hovered, setHovered] = useState({ search: false, trial: false });
-
-  const handleMouseEnter = (button) => {
-    setHovered({ ...hovered, [button]: true });
-  };
-
-  const handleMouseLeave = (button) => {
-    setHovered({ ...hovered, [button]: false });
-  };
-
+  
   return (
     <div className="home">
       <Container>
@@ -28,35 +20,14 @@ const Home = () => {
                 className="form-control"
                 placeholder="Search"
               />
-              <div style={{ marginTop: '10px' }}>
-                <Button
-                  variant="primary"
-                  style={{
-                    backgroundColor: hovered.search ? "white" : "#007bff",
-                    color: hovered.search ? "black" : "white",
-                    transition: "0.5s",
-                  }}
-                  onMouseEnter={() => handleMouseEnter("search")}
-                  onMouseLeave={() => handleMouseLeave("search")}
-                >
-                  Search
-                </Button>
-              </div>
+              <button className="searchBtn"> Search </button>
             </div>
             <div className="mt-3">
-              <Button
-                variant="primary"
-                className="mr-2"
-                style={{
-                  backgroundColor: hovered.trial ? "white" : "#007bff",
-                  color: hovered.trial ? "black" : "white",
-                  transition: "0.3s",
-                }}
-                onMouseEnter={() => handleMouseEnter("trial")}
-                onMouseLeave={() => handleMouseLeave("trial")}
+              <button
+                className="freeTrialBtn"
               >
                 Free Trial
-              </Button>
+              </button>
             </div>
           </Col>
         </Row>

@@ -1,25 +1,35 @@
 .footer {
-  height: 50%;
-  padding: 40px 0;
-}
-
-
-.footer {
   background: linear-gradient(to bottom, rgb(51, 55, 178), black);
-  padding: 40px 0; /* Increased padding */
-  position: relative;
   width: 100%;
-  bottom: 0;
- 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  row-gap: 4em;
 }
-
-.footer h5 {
-  margin-bottom: 10px;
+.footer-card-wrapper {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0 auto;
+}
+.footer-card {
+  height: 70px;
+  width: fit-content;
+}
+.socials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 2em;
+}
+.footer h5, .footer h2 {
   font-weight: bold;
 }
-
-.footer p {
-  margin-bottom: 5px;
+.copyright {
+  color: gray;
+  font-size: 12px;
 }
 
 .footer a {
@@ -29,25 +39,4 @@
 
 .footer a:hover {
   text-decoration: underline;
-}
-
-.expand-btn {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-.expand-btn:focus {
-  outline: none;
-}
-
-.scrollable {
-  max-height: 200px; 
-  overflow-y: auto;
-}
-
-.creator-info {
-  margin-bottom: 20px;
 }
