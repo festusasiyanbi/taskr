@@ -1,3 +1,53 @@
 .footer {
-  height: 7%;
+  height: 50%;
+  padding: 40px 0;
+}
+
+
+.footer {
+  background: linear-gradient(to bottom, rgb(51, 55, 178), black);
+  padding: 40px 0; /* Increased padding */
+  position: relative;
+  width: 100%;
+  bottom: 0;
+ 
+}
+
+.footer h5 {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.footer p {
+  margin-bottom: 5px;
+}
+
+.footer a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.expand-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.expand-btn:focus {
+  outline: none;
+}
+
+.scrollable {
+  max-height: 200px; 
+  overflow-y: auto;
+}
+
+.creator-info {
+  margin-bottom: 20px;
 }
