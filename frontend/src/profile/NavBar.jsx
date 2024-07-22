@@ -1,6 +1,7 @@
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import "../styles/profile.css";
+import "../index.css";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 

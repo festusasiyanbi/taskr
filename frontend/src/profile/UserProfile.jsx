@@ -1,14 +1,15 @@
 import React from "react";
 import Layout from "../components/Layout";
 import NavBar from "./NavBar";
-import Tasks from "./TaskManager";
 import "../styles/global.css";
+import "../index.css";
+import TaskManager from "./TaskManager";
 const UserProfile = () => {
   return (
     <Layout>
       <main className="task-wrapper">
         <NavBar />
-        <Tasks />
+        <TaskManager />
       </main>
     </Layout>
   );
