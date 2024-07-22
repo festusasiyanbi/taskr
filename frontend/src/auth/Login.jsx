@@ -1,53 +1,32 @@
-import React, { useState } from "react";
-import axios from "axios";
-import "../styles/login.css";
-import "../index.css";
+import React from "react";
+import "../styles/auth.css";
 import Layout from "../components/Layout";
+import { Link } from "react-router-dom";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post("/api/auth/login", {
-        username,
-        password,
-      });
-      localStorage.setItem("token", response.data.token);
-      alert("Login successful");
-    } catch (error) {
-      alert("Login failed");
-    }
-  };
 
   return (
     <Layout>
-      <div className="login-container">
-        <div className="login-form">
-          <h2>Login</h2>
-          <p>Access your account</p>
-          <form onSubmit={handleSubmit}>
-            <div className="input-group">
-              <label>Username</label>
-              <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </div>
-            <div className="input-group">
-              <label>Password</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <button type="submit">Login Now</button>
-          </form>
-        </div>
+      <div className="form-container">
+        <form>
+          <div className="inputs">
+            <label>Username</label>
+            <input
+              type="text"
+              placeholder="Enter your username"
+            />
+            <label>Password</label>
+            <input
+              type="password"
+              placeholder="Enter your password"
+            />
+            <button type="submit" className="authBtn">Login Now</button>
+          </div>
+          <div className="alternative-div">
+            <span>Are you a new user? </span>
+            <Link to="/signup" type="submit">Sign up</Link>
+          </div>
+        </form>
       </div>
     </Layout>
   );

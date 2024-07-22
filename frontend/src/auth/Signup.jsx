@@ -1,22 +1,28 @@
 import React from "react";
-import "../styles/signup.css";
-import "../index.css";
+import "../styles/auth.css";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 
 const Signup = () => {
   return (
     <Layout>
-      <div className="user">
+      <div className="form-container">
         <h3>Taskr</h3>
-        <form className="userForm">
+        <form>
           <div className="inputs">
-            <label htmlFor="name">Name:</label>
+            <label htmlFor="name">Full Name</label>
             <input
               type="text"
               id="name"
               autocomplete="off"
               placeholder="Enter your name"
+            />
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              autocomplete="off"
+              placeholder="Choose your username"
             />
             <label htmlFor="email">Email:</label>
             <input
@@ -32,15 +38,14 @@ const Signup = () => {
               autocomplete="off"
               placeholder="Enter your password"
             />
-            <button type="submit">SignUp</button>
+            <button type="submit" className="authBtn">SignUp</button>
+          </div>
+          <div className="alternative-div">
+            <span>Already have an account? </span>
+            <Link to="/login"> Login</Link>
           </div>
         </form>
-        <div className="login">
-          <p>Already have an account? </p>
-          <Link to="/login" type="submit" class="btn btn-dark">
-            Login
-          </Link>
-        </div>
+
       </div>
     </Layout>
   );

@@ -9,7 +9,7 @@
 }
 .layout > main {
   width: 100vw;
-  height: 85%;
+  height: 80%;
 }
 .background-gradient {
   background: linear-gradient(to right, rgb(12, 13, 50), black);
