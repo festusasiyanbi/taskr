@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { Nav } from "react-bootstrap";
+import React from "react";
 import "../styles/footer.css";
 import "../styles/global.css";
-import { FaChevronUp, FaChevronDown, FaEnvelope, FaLinkedin, FaGithub } from "react-icons/fa";
+import { FaEnvelope, FaLinkedin, FaGithub } from "react-icons/fa";
 
 const Footer = () => {
   const year = new Date().getFullYear();

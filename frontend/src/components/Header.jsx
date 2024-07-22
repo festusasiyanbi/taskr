@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Navbar, Nav, Button } from "react-bootstrap";
+import React from "react";
+import { Navbar, Nav } from "react-bootstrap";
 import "../styles/header.css";
 import "../styles/global.css";
 
