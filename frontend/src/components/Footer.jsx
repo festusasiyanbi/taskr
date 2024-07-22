@@ -22,8 +22,8 @@ const Footer = () => {
     {
       name: "Kevine AWUDI",
       email: "mailto:wudkevin@icloud.com",
-      linkedin: "https://www.linkedin.com/in/festusasiyanbi",
-      github: "https://www.github.com/festusasiyanbi"
+      linkedin: "https://www.linkedin.com/in/kevine-awudi-9b6108271/",
+      github: "https://www.github.com/WUDKVN"
     },
     {
       name: "Jennifer Jude",
