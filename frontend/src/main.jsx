@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Login from "./auth/Login.jsx";
 import Signup from "./auth/Signup.jsx";
 import UserProfile from "./profile/UserProfile.jsx";
+import FourZeroFour from "./components/FourZeroFour.jsx";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <UserProfile />,
+  },
+  {
+    path: "*",
+    element: <FourZeroFour />,
   },
 ]);
 

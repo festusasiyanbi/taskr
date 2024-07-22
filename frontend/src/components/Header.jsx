@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <Navbar className="header background-gradient">
       <Navbar.Brand href="/" className="nav-brand">
-        <img src="/logo.jpeg" height="50px" width="50px" alt="Logo" />
+        <img src={"../../assets/images/logo.jpeg"} height="50px" width="50px" alt="Logo" />
         <span>CODEFUSION</span>
       </Navbar.Brand>
       <Nav className="nav">
