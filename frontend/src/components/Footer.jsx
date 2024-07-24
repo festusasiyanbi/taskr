@@ -15,9 +15,9 @@ const Footer = () => {
     },
     {
       name: "Ayowolemi Eni-Omosule",
-      email: "mailto:your email",
+      email: "mailto:ayowolemieniomosule@gmail.com",
       linkedin: "https://www.linkedin.com/in/festusasiyanbi",
-      github: "https://www.github.com/festusasiyanbi",
+      github: "https://www.github.com/Geiranix",
     },
     {
       name: "Kevine AWUDI",
@@ -29,7 +29,7 @@ const Footer = () => {
       name: "Jennifer Jude",
       email: "mailto:your email",
       linkedin: "https://www.linkedin.com/in/festusasiyanbi",
-      github: "https://www.github.com/festusasiyanbi"
+      github: "https://www.github.com/Nechenwa"
     },
     {
       name: "Gessia Conrado",
