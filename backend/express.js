@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import cors from 'cors';
 import authRoutes from './routes/authRoutes.js';
 import { fileURLToPath } from 'url';
 
@@ -10,6 +11,11 @@ app.use(express.json()); // Parses incoming JSON requests
 
 // API Routes
 app.use('/api', authRoutes);
+
+// Configure CORS to be able to interact with API endpoint on different port
+// app.use(express.urlencoded({ extended: true }));
+
+app.use(cors());
 
 // Static File Serving
 const __filename = fileURLToPath(import.meta.url);
