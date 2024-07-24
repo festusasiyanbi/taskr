@@ -5,11 +5,9 @@ import "./index.css";
 
 function App() {
   return (
-    <div>
-      <Layout>
-        <Home />
-      </Layout>
-    </div>
+    <Layout>
+      <Home />
+    </Layout>
   );
 }
 

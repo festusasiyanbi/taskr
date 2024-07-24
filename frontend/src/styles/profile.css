@@ -22,10 +22,12 @@
 .task-wrapper {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  width: 98%;
+  align-items: flex-start;
+  width: 99%;
   height: 100%;
   column-gap: 20px;
+  padding: 2em 0;
+  overflow: scroll;
 }
 .task-manager {
   width: 100%;
@@ -34,6 +36,7 @@
   justify-content: space-between;
   flex-direction: column;
   height: 100%;
+  margin-bottom: 2em;
 }
 .task-manager button {
   border-radius: 7px;

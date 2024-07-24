@@ -5,10 +5,10 @@ const Tasks = ({ tasks, setTasks }) => {
   const [status, setStatus] = useState("not started");
 
   const statuses = [
-    { type: "all" },
-    { type: "not started" },
-    { type: "in progress" },
-    { type: "completed" },
+    { _id: 1, type: "all" },
+    { _id: 2, type: "not started" },
+    { _id: 3, type: "in progress" },
+    { _id: 4, type: "completed" },
   ];
 
   const getColorForTaskType = (type) => {
@@ -66,7 +66,7 @@ const Tasks = ({ tasks, setTasks }) => {
     <div className="tasks">
       <div className="status-wrapper">
         {statuses.map((statusObject) => (
-          <div className="status-div">
+          <div className="status-div" key={statusObject._id}>
             <button
               className="status-type"
               style={{
@@ -93,7 +93,7 @@ const Tasks = ({ tasks, setTasks }) => {
       <div className="task-container">
         {filterTasks().length > 0 ? (
           filterTasks().map((task) => (
-            <div className="task-card">
+            <div className="task-card" key={task._id}>
               <div style={{ display: "flex", columnGap: 10 }}>
                 <span
                   className="task-type"

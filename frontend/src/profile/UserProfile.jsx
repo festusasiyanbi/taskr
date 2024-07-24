@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import NavBar from "./NavBar";
 import "../styles/global.css";
 import "../index.css";
 import TaskManager from "./TaskManager";
+import AuthContext from "../context/AuthProvider";
+
 const UserProfile = () => {
+  const { user, loading, error } = useContext(AuthContext);
+  console.log(user);
   return (
     <Layout>
       <main className="task-wrapper">

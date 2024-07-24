@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import "../styles/header.css";
 import "../styles/global.css";
+import AuthContext from "../context/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    try {
+      const response = await fetch("/api/auth/signout", {
+        method: 'GET',
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+      }
+      localStorage.removeItem('token');
+      navigate('/login');
+    } catch (error) {
+      console.error('Sign out failed:', error);
+    }
+  };
 
   return (
     <Navbar className="header background-gradient">
@@ -15,12 +36,20 @@ const Header = () => {
         <Nav.Link href="/" className="nav-link ml-3 text-white">Home</Nav.Link>
         <Nav.Link href="/about" className="nav-link ml-3 text-white">About</Nav.Link>
         <Nav.Link href="/contact" className="nav-link ml-3 text-white">Contact</Nav.Link>
-        <Nav.Link href="/login" className="nav-link">
-          <button className="operationBtn" >Login</button>
-        </Nav.Link>
-        <Nav.Link href="/signup" className="nav-link">
-          <button className="operationBtn" >Sign Up</button>
-        </Nav.Link>
+        {user ? (
+          <Nav.Link className="nav-link">
+            <button className="operationBtn" onClick={handleSignOut}>Sign out</button>
+          </Nav.Link>
+        ) : (
+          <>
+            <Nav.Link href="/login" className="nav-link">
+              <button className="operationBtn">Login</button>
+            </Nav.Link>
+            <Nav.Link href="/signup" className="nav-link">
+              <button className="operationBtn" >Sign Up</button>
+            </Nav.Link>
+          </>
+        )}
       </Nav>
     </Navbar>
   );

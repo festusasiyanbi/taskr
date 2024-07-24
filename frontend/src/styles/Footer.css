@@ -5,7 +5,8 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  row-gap: 4em;
+  height: fit-content;
+  row-gap: 1em;
 }
 .footer-card-wrapper {
   display: flex;

@@ -9,15 +9,15 @@ function NavBar() {
   const { pathname } = useLocation();
   const [activeNav, setActiveNav] = useState(pathname);
   const navbars = [
-    { text: "Home", link: "/" },
-    { text: "Account", link: "/profile" },
-    { text: "Settings", link: "/settings" },
-    { text: "Logout", link: "/login" },
+    { _id: 1, text: "Home", link: "/" },
+    { _id: 2, text: "Account", link: "/profile" },
+    { _id: 3, text: "Settings", link: "/settings" },
+    { _id: 4, text: "Logout", link: "/login" },
   ];
   return (
     <div className="navbar-container">
       {navbars.map((navbar) => (
-        <Navbar className="bg-custom-transparent">
+        <Navbar className="bg-custom-transparent" key={navbar._id}>
           <Container>
             <Navbar.Text
               as={Link}

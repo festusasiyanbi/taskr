@@ -2,20 +2,27 @@ import express from 'express';
 import path from 'path';
 import cors from 'cors';
 import authRoutes from './routes/authRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 import { fileURLToPath } from 'url';
+
 
 const app = express();
 
 // Middleware
-app.use(express.json()); // Parses incoming JSON requests
+app.use(express.json());
+
 
 // API Routes
 app.use('/api', authRoutes);
+app.use('/api', userRoutes);
+app.use(express.urlencoded({ extended: true }));
 
-// Configure CORS to be able to interact with API endpoint on different port
-// app.use(express.urlencoded({ extended: true }));
-
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+}));
 
 // Static File Serving
 const __filename = fileURLToPath(import.meta.url);

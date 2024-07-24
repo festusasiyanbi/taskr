@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "../styles/auth.css";
 import Layout from "../components/Layout";
 import { Link, useNavigate } from "react-router-dom";
-import { api } from "../api/axios";
 
 const Login = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
@@ -16,22 +15,35 @@ const Login = () => {
     setFormData((values) => ({ ...values, [name]: value }));
   };
 
-  const handleSubmit = async (event) => {
+  const handleLoginUser = async (event) => {
     event.preventDefault();
     setLoading(true);
+
     try {
-      const response = await api.post("auth/login", formData);
-      setSuccess(response.data.message || "Login successful");
-      setLoading(false);
-      setError("");
-      window.alert(response.data.message || "Login successful");
-      navigate("/profile");
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem('token', data.token);
+        navigate(`/profile`);
+      } else {
+        setError(data.message || 'Login failed');
+      }
     } catch (error) {
+      setError('An error occurred');
+    } finally {
       setLoading(false);
-      setError(error.response?.data?.message || error.message);
-      window.alert(error.response?.data?.message || error.message);
     }
   };
+
+
 
   if (loading) {
     return <div>Loading....</div>;
@@ -44,7 +56,7 @@ const Login = () => {
   return (
     <Layout>
       <div className="form-container">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleLoginUser}>
           <div className="inputs">
             <label>Username</label>
             <input

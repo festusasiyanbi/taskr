@@ -1,20 +1,30 @@
 import User from '../models/authModel.js';
-import { expressjwt } from 'express-jwt';
 import jwt from 'jsonwebtoken';
 import config from '../dbconfig/config.js';
 
 const handleCreateUser = async (req, res) => {
     const { name, username, email, password } = req.body;
-    const user = new User({ name, username, email, password });
+
     try {
+        const isUsernameExist = await User.findOne({ username });
+        const isEmailExist = await User.findOne({ email });
+
+        if (isUsernameExist) {
+            return res.status(400).json({ message: `A user with the username ${username} already exists.` });
+        }
+
+        if (isEmailExist) {
+            return res.status(400).json({ message: `A user with the email ${email} already exists.` });
+        }
+
+        const user = new User({ name, username, email, password });
         await user.save();
-        return res.status(200).json({
-            message: "Successfully signed up!",
-        });
+
+        return res.status(200).json({ message: "Successfully signed up!" });
     } catch (error) {
         return res.status(400).json({ error: error.message });
     }
-}
+};
 
 const handleLoginUser = async (req, res) => {
     const { username, password } = req.body;
@@ -41,11 +51,20 @@ const handleSignout = (req, res) => {
     });
 };
 
-const handleRequireSignin = expressjwt({
-    secret: config.jwtSecret,
-    algorithms: ["HS256"],
-    userProperty: "auth",
-});
+const handleRequireSignin = async (req, res, next) => {
+    const token = req.headers['authorization']?.split(' ')[1];
+    if (!token) {
+        return res.status(401).json({ error: "No token provided" });
+    }
+
+    try {
+        const decoded = jwt.verify(token, config.jwtSecret);
+        req.user = decoded;
+        next();
+    } catch (error) {
+        res.status(401).json({ error: "Invalid or expired token" });
+    }
+};
 
 const handleAuthorization = (req, res, next) => {
     const authorized = req.profile && req.auth && req.profile._id == req.auth._id;
