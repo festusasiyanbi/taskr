@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import TaskContext from '../context/TaskProvider';
+import Layout from '../components/Layout';
 
 const TaskModal = ({ setIsModal }) => {
     const { handlePostTasks, title, setTitle, type, setType, description, setDescription } = useContext(TaskContext);
@@ -12,14 +13,14 @@ const TaskModal = ({ setIsModal }) => {
     return (
         <div className='task-modal-container'>
             <div className='task-modal-wrapper'>
-                <div className='modal-header'>
+                <div className='task-modal-header'>
                     <h2>Create Task</h2>
                     <FaTimes onClick={() => setIsModal(false)} />
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className='task-info-div'>
                         <label htmlFor="title">Title: </label>
-                        <input 
+                        <input
                             id="title"
                             type="text"
                             placeholder='Enter your task title'
@@ -30,7 +31,7 @@ const TaskModal = ({ setIsModal }) => {
                     </div>
                     <div className='task-info-div'>
                         <label htmlFor="description">Description: </label>
-                        <input 
+                        <input
                             id="description"
                             type="text"
                             placeholder='Enter your task description'
@@ -41,7 +42,7 @@ const TaskModal = ({ setIsModal }) => {
                     </div>
                     <div className='task-info-div'>
                         <label htmlFor="type">Type: </label>
-                        <select 
+                        <select
                             id="type"
                             value={type}
                             onChange={(e) => setType(e.target.value)}
