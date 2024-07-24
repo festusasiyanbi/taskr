@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "../index.css";
+import TaskContext from "../context/TaskProvider";
 
-const Tasks = ({ tasks, setTasks }) => {
+const Tasks = () => {
   const [status, setStatus] = useState("not started");
-
+  const { tasks, setTasks, loading, error } = useContext(TaskContext);
   const statuses = [
     { _id: 1, type: "all" },
     { _id: 2, type: "not started" },
@@ -37,10 +38,14 @@ const Tasks = ({ tasks, setTasks }) => {
   };
 
   const filterTasks = () => {
-    if (status === "all") {
-      return tasks;
+    if(tasks.length !== 0) {
+      if (status === "all") {
+        return tasks;
+      } else {
+        return tasks.filter((task) => task.status === status);
+      }
     } else {
-      return tasks.filter((task) => task.status === status);
+      return;
     }
   };
 
@@ -50,6 +55,7 @@ const Tasks = ({ tasks, setTasks }) => {
     );
     setTasks(updatedTask);
   };
+
   const handleCompleteTask = (id) => {
     const updatedTask = tasks.map((task) =>
       task.id === id ? { ...task, status: "completed" } : task
@@ -62,6 +68,17 @@ const Tasks = ({ tasks, setTasks }) => {
     );
     setTasks(updatedTask);
   };
+
+  if (loading) {
+    return (
+      <div>Loading ...</div>
+    );
+  }
+
+  if (error) {
+    return (<div>Error: {error}</div>)
+  }
+  console.log(tasks);
   return (
     <div className="tasks">
       <div className="status-wrapper">
@@ -112,19 +129,22 @@ const Tasks = ({ tasks, setTasks }) => {
               </div>
               <p className="task-title">{task.title}</p>
               <p className="task-description">{task.description}</p>
+              <div style={{width: '100%', display: "flex", columnGap: 10,}}>
               {task.status === "not started" ? (
                 <button onClick={() => handleStartTask(task.id)}>
                   Start Task
                 </button>
               ) : task.status === "in progress" ? (
                 <button onClick={() => handleCompleteTask(task.id)}>
-                  Mark As Complete
+                  Complete Task
                 </button>
               ) : (
                 <button onClick={() => handleRepeatTask(task.id)}>
                   Repeat Task
                 </button>
               )}
+              <button style={{ backgroundColor: 'red'}}>Delete Task</button>
+              </div>
             </div>
           ))
         ) : (

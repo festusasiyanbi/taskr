@@ -10,6 +10,7 @@ import UserProfile from "./profile/UserProfile.jsx";
 import FourZeroFour from "./components/FourZeroFour.jsx";
 import ProtectedRoute from "./auth/ProtectedRoute.jsx";
 import { AuthProvider } from "./context/AuthProvider.jsx";
+import { TaskProvider } from "./context/TaskProvider.jsx";
 
 const router = createBrowserRouter([
   {
@@ -37,7 +38,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <TaskProvider>
+        <RouterProvider router={router} />
+      </TaskProvider>
     </AuthProvider>
   </React.StrictMode>
 );

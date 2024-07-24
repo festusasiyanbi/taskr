@@ -1,9 +1,9 @@
 import Task from "../models/taskModel.js";
 
 const createTask = async (req, res) => {
-    const { type, status, title, description } = req.body;
+    const { type, status = "not started", title, description } = req.body;
 
-    if (!type || !status || !title || !description) {
+    if (!type || !title || !description) {
         return res.status(400).json({ error: 'All fields are required' });
     }
 
@@ -28,7 +28,7 @@ const createTask = async (req, res) => {
 
 const getAllTasks = async (req, res) => {
     try {
-        const tasks = Task.find({ user: req.user._id });
+        const tasks = await Task.find({ user: req.user._id }).exec();
         if (tasks.length === 0) {
             return res.status(204).json({ message: "No tasks yet, enjoy the silence." })
         }

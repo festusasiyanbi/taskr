@@ -4,17 +4,18 @@ import NavBar from "./NavBar";
 import "../styles/global.css";
 import "../index.css";
 import TaskManager from "./TaskManager";
-import AuthContext from "../context/AuthProvider";
+import TaskModal from "./TaskModal";
 
 const UserProfile = () => {
-  const { user, loading, error } = useContext(AuthContext);
+  const [isModal, setIsModal] = useState(false);
 
   return (
     <Layout>
-      <main className="task-wrapper">
-        <NavBar />
-        <TaskManager />
-      </main>
+      {isModal ? <TaskModal setIsModal={setIsModal}/> :
+        <main className="task-wrapper">
+          <NavBar />
+          <TaskManager setIsModal={setIsModal} />
+        </main>}
     </Layout>
   );
 };
