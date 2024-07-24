@@ -1,9 +1,9 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useRef } from "react";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
         };
 
         fetchUser();
-    }, []);
+    }, [user]);
 
     return (
         <AuthContext.Provider value={{ user, setUser, loading, error }}>

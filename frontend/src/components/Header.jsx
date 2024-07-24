@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import "../styles/header.css";
 import "../styles/global.css";
@@ -26,7 +26,6 @@ const Header = () => {
       console.error('Sign out failed:', error);
     }
   };
-
   return (
     <Navbar className="header background-gradient">
       <Navbar.Brand href="/" className="nav-brand">

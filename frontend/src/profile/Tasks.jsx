@@ -4,7 +4,7 @@ import TaskContext from "../context/TaskProvider";
 
 const Tasks = () => {
   const [status, setStatus] = useState("not started");
-  const { tasks, setTasks, loading, error } = useContext(TaskContext);
+  const { tasks, setTasks, loading, error, handleDeleteTask } = useContext(TaskContext);
   const statuses = [
     { _id: 1, type: "all" },
     { _id: 2, type: "not started" },
@@ -12,6 +12,11 @@ const Tasks = () => {
     { _id: 4, type: "completed" },
   ];
 
+  if (!tasks.length) {
+    return (
+      <div>No tasks found</div>
+    );
+  }
   const getColorForTaskType = (type) => {
     const typeColors = {
       design: "#FFBF00",
@@ -78,7 +83,7 @@ const Tasks = () => {
   if (error) {
     return (<div>Error: {error}</div>)
   }
-  console.log(tasks);
+
   return (
     <div className="tasks">
       <div className="status-wrapper">
@@ -143,7 +148,7 @@ const Tasks = () => {
                   Repeat Task
                 </button>
               )}
-              <button style={{ backgroundColor: 'red'}}>Delete Task</button>
+              <button style={{ backgroundColor: 'red'}} onClick={() => handleDeleteTask(task._id)}>Delete Task</button>
               </div>
             </div>
           ))

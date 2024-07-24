@@ -6,9 +6,8 @@ import AuthContext from "../context/AuthProvider";
 
 const Login = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
-  const { setUser } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -37,7 +36,6 @@ const Login = () => {
       localStorage.setItem('token', data.token);
       setUser(data.user);
       navigate('/user/profile');
-
     } catch (error) {
       setError('An error occurred');
     } finally {
@@ -49,10 +47,6 @@ const Login = () => {
 
   if (loading) {
     return <div>Loading....</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
   }
 
   return (

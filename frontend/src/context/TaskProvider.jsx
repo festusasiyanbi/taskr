@@ -1,4 +1,5 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import AuthContext from "./AuthProvider";
 
 const TaskContext = createContext();
 
@@ -10,6 +11,7 @@ export const TaskProvider = ({ children }) => {
     const [success, setSuccess] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const {user} = useContext(AuthContext);
 
     const fetchAllTasks = async () => {
         const token = localStorage.getItem('token');
@@ -32,7 +34,6 @@ export const TaskProvider = ({ children }) => {
             }
 
             const data = await response.json();
-            console.log(data);
             setTasks(data);
             setLoading(false);
             setError("");
@@ -72,7 +73,7 @@ export const TaskProvider = ({ children }) => {
 
             const data = await response.json();
             setSuccess(data.message);
-            console.log(data, data.message);
+            window.location.reload();
             setType('');
             setTitle('');
             setDescription('');
@@ -82,9 +83,36 @@ export const TaskProvider = ({ children }) => {
         }
     };
 
+    const handleDeleteTask = async (id) => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            setError('User not authenticated');
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/tasks/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Something went wrong');
+            }
+
+            setTasks(tasks.filter(task => task._id !== id));
+            setError('');
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
     useEffect(() => {
         fetchAllTasks();
-    }, []);
+    }, [user]);
 
     return (
         <TaskContext.Provider value={{ 
@@ -92,7 +120,7 @@ export const TaskProvider = ({ children }) => {
             error, handlePostTasks, type, 
             setType, title, setTitle, 
             description, setDescription,
-            success
+            success, handleDeleteTask
          }}>
             {children}
         </TaskContext.Provider>
