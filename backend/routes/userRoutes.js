@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.use(handleRequireSignin);
 
-router.get('/profile', async (req, res) => {
+router.get('/user/profile', async (req, res) => {
     const userId = req.user._id;
     try {
         const user = await User.findById(userId);

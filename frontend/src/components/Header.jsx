@@ -39,7 +39,7 @@ const Header = () => {
         <Nav.Link href="/contact" className="nav-link ml-3 text-white">Contact</Nav.Link>
         {user ? (
           <>
-            <Nav.Link href="/profile" className="nav-link">
+            <Nav.Link href="/user/profile" className="nav-link">
               <button className="operationBtn">Profile</button>
             </Nav.Link>
             <Nav.Link className="nav-link">

@@ -10,7 +10,7 @@ function NavBar() {
   const [activeNav, setActiveNav] = useState(pathname);
   const navbars = [
     { _id: 1, text: "Home", link: "/" },
-    { _id: 2, text: "Account", link: "/profile" },
+    { _id: 2, text: "Account", link: "/user/profile" },
     { _id: 3, text: "Settings", link: "/settings" },
     { _id: 4, text: "Logout", link: "/login" },
   ];

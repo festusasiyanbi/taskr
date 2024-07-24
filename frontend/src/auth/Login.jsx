@@ -36,7 +36,7 @@ const Login = () => {
       const data = await response.json();
       localStorage.setItem('token', data.token);
       setUser(data.user);
-      navigate('/profile');
+      navigate('/user/profile');
 
     } catch (error) {
       setError('An error occurred');
