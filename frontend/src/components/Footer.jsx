@@ -33,9 +33,9 @@ const Footer = () => {
     },
     {
       name: "Gessia Conrado",
-      email: "mailto:your email",
-      linkedin: "https://www.linkedin.com/in/festusasiyanbi",
-      github: "https://www.github.com/festusasiyanbi",
+      email: "mailto:gessia.cm@gmail.com",
+      linkedin: "https://www.linkedin.com/in/gessia-conrado-792513229/",
+      github: "https://github.com/gmagalhaes1",
     },
   ];
 
