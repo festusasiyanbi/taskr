@@ -1,15 +1,19 @@
 import React, { useContext } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
 import AuthContext from '../context/AuthProvider';
+import UserProfile from '../profile/UserProfile';
+import Login from './Login';
 
-const ProtectedRoute = ({ children }) => {
-    const { user, loading } = useContext(AuthContext);
+const ProtectedRoute = () => {
+    const { user, loading, error } = useContext(AuthContext);
 
     if (loading) {
         return <div>Loading...</div>;
     }
 
-    return user ? <Outlet /> : <Navigate to="/login" replace />;
+    if(error) {
+        return <div>Error: {error}</div>
+    }
+    return user ? <UserProfile /> : <Login />;
 };
 
 export default ProtectedRoute;

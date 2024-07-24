@@ -6,7 +6,7 @@ import AuthContext from "../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
@@ -20,6 +20,7 @@ const Header = () => {
         throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
       }
       localStorage.removeItem('token');
+      setUser(null);
       navigate('/login');
     } catch (error) {
       console.error('Sign out failed:', error);
@@ -37,9 +38,14 @@ const Header = () => {
         <Nav.Link href="/about" className="nav-link ml-3 text-white">About</Nav.Link>
         <Nav.Link href="/contact" className="nav-link ml-3 text-white">Contact</Nav.Link>
         {user ? (
-          <Nav.Link className="nav-link">
-            <button className="operationBtn" onClick={handleSignOut}>Sign out</button>
-          </Nav.Link>
+          <>
+            <Nav.Link href="/profile" className="nav-link">
+              <button className="operationBtn">Profile</button>
+            </Nav.Link>
+            <Nav.Link className="nav-link">
+              <button className="operationBtn" onClick={handleSignOut}>Sign out</button>
+            </Nav.Link>
+          </>
         ) : (
           <>
             <Nav.Link href="/login" className="nav-link">

@@ -3,7 +3,7 @@ import { createContext, useState, useEffect } from "react";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
                     throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
                 }
                 const data = await response.json();
-                setUser(data);
+                setUser(data.user);
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ user, loading, error }}>
+        <AuthContext.Provider value={{ user, setUser, loading, error }}>
             {children}
         </AuthContext.Provider>
     );

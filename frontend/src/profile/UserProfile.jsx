@@ -8,7 +8,7 @@ import AuthContext from "../context/AuthProvider";
 
 const UserProfile = () => {
   const { user, loading, error } = useContext(AuthContext);
-  console.log(user);
+
   return (
     <Layout>
       <main className="task-wrapper">
