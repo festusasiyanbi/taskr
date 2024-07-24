@@ -23,13 +23,13 @@ const Footer = () => {
       name: "Kevine AWUDI",
       email: "mailto:wudkevin@icloud.com",
       linkedin: "https://www.linkedin.com/in/kevine-awudi-9b6108271/",
-      github: "https://www.github.com/WUDKVN"
+      github: "https://www.github.com/WUDKVN",
     },
     {
       name: "Jennifer Jude",
-      email: "mailto:your email",
-      linkedin: "https://www.linkedin.com/in/festusasiyanbi",
-      github: "https://www.github.com/Nechenwa"
+      email: "mailto:jenniferjude4@gmail.com",
+      linkedin: "https://www.linkedin.com/in/jenniferjude04/",
+      github: "https://www.github.com/Nechenwa",
     },
     {
       name: "Gessia Conrado",
@@ -60,7 +60,10 @@ const Footer = () => {
           </div>
         ))}
       </div>
-      <p className="copyright"> &copy; {year} CODEFUSION | All rights reserved.</p>
+      <p className="copyright">
+        {" "}
+        &copy; {year} CODEFUSION | All rights reserved.
+      </p>
     </footer>
   );
 };
