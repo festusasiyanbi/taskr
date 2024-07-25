@@ -109,6 +109,55 @@ export const TaskProvider = ({ children }) => {
             setError(error.message);
         }
     };
+    const handleUpdateTaskStatus = async (id, status) => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.error('User not authenticated');
+            return;
+        }
+    
+        try {
+            const response = await fetch(`/api/tasks/${id}/status`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify({ status }),
+            });
+    
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Something went wrong');
+            }
+    
+            const data = await response.json();
+            console.log(data.message);
+            return data.task;
+        } catch (error) {
+            console.error(error.message);
+        }
+    };
+    const handleStartTask = async (id) => {
+        const updatedTask = await handleUpdateTaskStatus(id, 'in progress');
+        if (updatedTask) {
+            setTasks(tasks.map(task => task._id === id ? updatedTask : task));
+        }
+    };
+    
+    const handleCompleteTask = async (id) => {
+        const updatedTask = await handleUpdateTaskStatus(id, 'completed');
+        if (updatedTask) {
+            setTasks(tasks.map(task => task._id === id ? updatedTask : task));
+        }
+    };
+    
+    const handleRepeatTask = async (id) => {
+        const updatedTask = await handleUpdateTaskStatus(id, 'not started');
+        if (updatedTask) {
+            setTasks(tasks.map(task => task._id === id ? updatedTask : task));
+        }
+    };
 
     useEffect(() => {
         fetchAllTasks();
@@ -120,7 +169,8 @@ export const TaskProvider = ({ children }) => {
             error, handlePostTasks, type, 
             setType, title, setTitle, 
             description, setDescription,
-            success, handleDeleteTask
+            success, handleStartTask, handleCompleteTask, 
+            handleRepeatTask, handleDeleteTask
          }}>
             {children}
         </TaskContext.Provider>

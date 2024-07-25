@@ -2,9 +2,9 @@ import React, { useContext, useState } from "react";
 import "../index.css";
 import TaskContext from "../context/TaskProvider";
 
-const Tasks = () => {
+const Tasks = ({ tasks }) => {
   const [status, setStatus] = useState("not started");
-  const { tasks, setTasks, loading, error, handleDeleteTask } = useContext(TaskContext);
+  const { loading, error, handleStartTask, handleCompleteTask, handleRepeatTask, handleDeleteTask } = useContext(TaskContext);
   const statuses = [
     { _id: 1, type: "all" },
     { _id: 2, type: "not started" },
@@ -41,7 +41,7 @@ const Tasks = () => {
   const fetchTaskStatus = (status) => {
     setStatus(status);
   };
-
+  
   const filterTasks = () => {
     if(tasks.length !== 0) {
       if (status === "all") {
@@ -54,25 +54,6 @@ const Tasks = () => {
     }
   };
 
-  const handleStartTask = (id) => {
-    const updatedTask = tasks.map((task) =>
-      task.id === id ? { ...task, status: "in progress" } : task
-    );
-    setTasks(updatedTask);
-  };
-
-  const handleCompleteTask = (id) => {
-    const updatedTask = tasks.map((task) =>
-      task.id === id ? { ...task, status: "completed" } : task
-    );
-    setTasks(updatedTask);
-  };
-  const handleRepeatTask = (id) => {
-    const updatedTask = tasks.map((task) =>
-      task.id === id ? { ...task, status: "not started" } : task
-    );
-    setTasks(updatedTask);
-  };
 
   if (loading) {
     return (
@@ -136,15 +117,15 @@ const Tasks = () => {
               <p className="task-description">{task.description}</p>
               <div style={{width: '100%', display: "flex", columnGap: 10,}}>
               {task.status === "not started" ? (
-                <button onClick={() => handleStartTask(task.id)}>
+                <button onClick={() => handleStartTask(task._id)}>
                   Start Task
                 </button>
               ) : task.status === "in progress" ? (
-                <button onClick={() => handleCompleteTask(task.id)}>
+                <button onClick={() => handleCompleteTask(task._id)}>
                   Complete Task
                 </button>
               ) : (
-                <button onClick={() => handleRepeatTask(task.id)}>
+                <button onClick={() => handleRepeatTask(task._id)}>
                   Repeat Task
                 </button>
               )}
