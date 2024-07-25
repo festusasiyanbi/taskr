@@ -14,8 +14,8 @@ const TaskModal = ({ setIsModal }) => {
         <div className='task-modal-container'>
             <div className='task-modal-wrapper'>
                 <div className='task-modal-header'>
-                    <h2>Create Task</h2>
-                    <FaTimes onClick={() => setIsModal(false)} />
+                    <h4>Create Task</h4>
+                    <FaTimes onClick={() => setIsModal(false)} size={20} title='Cancel operation' style={{ cursor: "pointer" }}/>
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className='task-info-div'>
