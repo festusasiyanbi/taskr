@@ -7,13 +7,11 @@
   }
   
   .about-container h1 {
-    font-family: 'Fairwater Script', cursive;
     margin-bottom: 20px;
     font-size: 3em; 
   }
   
   .about-container p {
     font-size: 1.2em;
-    line-height: 3;
   }
   
