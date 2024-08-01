@@ -1,8 +1,8 @@
 .home {
   background: linear-gradient(to right, rgb(12, 13, 50), black);
   color: white;
-  padding: 100px 0;
   width: 100%;
+  padding: 100px 2em;
 }
 .display-3 {
   font-weight: 700;
