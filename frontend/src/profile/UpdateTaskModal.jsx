@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 import TaskContext from "../context/TaskProvider";
 

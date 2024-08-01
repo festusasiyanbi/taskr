@@ -1,5 +1,4 @@
 import React from "react";
-import { Container, Row, Col} from "react-bootstrap";
 import "../styles/home.css";
 import "../index.css"
 
@@ -7,9 +6,9 @@ const Home = () => {
 
   return (
     <div className="home">
-      <Container>
-        <Row className="align-items-center" style={{ minHeight: "80vh" }}>
-          <Col md={6}>
+      <div className="home-container">
+        <div className="align-items-center" style={{ minHeight: "80vh" }}>
+          <div>
             <h1 className="text-white" style={{ fontSize: '120px' }}>Welcome.</h1>
             <p className="text-white" style={{ fontSize: '17px' }}>
               Simplify your workflow and boost your productivity. Start managing your tasks efficiently with our intuitive task management app. Try it now!
@@ -29,9 +28,9 @@ const Home = () => {
                 Free Trial
               </button>
             </div>
-          </Col>
-        </Row>
-      </Container>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

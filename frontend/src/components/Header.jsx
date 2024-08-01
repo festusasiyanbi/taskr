@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from "react";
-import { Navbar, Nav } from "react-bootstrap";
+import React, { useContext } from "react";
 import "../styles/header.css";
 import "../styles/global.css";
 import AuthContext from "../context/AuthProvider";
@@ -27,36 +26,36 @@ const Header = () => {
     }
   };
   return (
-    <Navbar className="header background-gradient">
-      <Navbar.Brand href="/" className="nav-brand">
+    <div className="header background-gradient">
+      <a href="/" className="nav-brand">
         <img src={"../../assets/images/logo.jpeg"} height="50px" width="50px" alt="Logo" />
         <span>CODEFUSION</span>
-      </Navbar.Brand>
-      <Nav className="nav">
-        <Nav.Link href="/" className="nav-link ml-3 text-white">Home</Nav.Link>
-        <Nav.Link href="/about" className="nav-link ml-3 text-white">About</Nav.Link>
-        <Nav.Link href="/contact" className="nav-link ml-3 text-white">Contact</Nav.Link>
+      </a>
+      <div className="nav">
+        <a href="/" className="nav-link ml-3 text-white">Home</a>
+        <a href="/about" className="nav-link ml-3 text-white">About</a>
+        <a href="/contact" className="nav-link ml-3 text-white">Contact</a>
         {user ? (
           <>
-            <Nav.Link href="/user/profile" className="nav-link">
+            <a href="/user/profile" className="nav-link">
               <button className="operationBtn">Profile</button>
-            </Nav.Link>
-            <Nav.Link className="nav-link">
+            </a>
+            <a className="nav-link">
               <button className="operationBtn" onClick={handleSignOut}>Sign out</button>
-            </Nav.Link>
+            </a>
           </>
         ) : (
           <>
-            <Nav.Link href="/login" className="nav-link">
+            <a href="/login" className="nav-link">
               <button className="operationBtn">Login</button>
-            </Nav.Link>
-            <Nav.Link href="/signup" className="nav-link">
+            </a>
+            <a href="/signup" className="nav-link">
               <button className="operationBtn" >Sign Up</button>
-            </Nav.Link>
+            </a>
           </>
         )}
-      </Nav>
-    </Navbar>
+      </div>
+    </div>
   );
 };
 
