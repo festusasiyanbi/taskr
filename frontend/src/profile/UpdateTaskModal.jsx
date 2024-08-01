@@ -1,36 +1,43 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import TaskContext from "../context/TaskProvider";
 
 const UpdateTaskModal = ({ isUpdateModal, setIsUpdateModal }) => {
-  const {
-    handleUpdateTask,
-    title,
-    setTitle,
-    type,
-    setType,
-    description,
-    setDescription,
-    setTaskToUpdate,
-  } = useContext(TaskContext);
-  console.log(isUpdateModal);
+  const { handleUpdateTask } = useContext(TaskContext);
+  const [taskId, setTaskId] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [type, setType] = useState("");
+
   useEffect(() => {
     if (isUpdateModal) {
-      setTaskToUpdate(isUpdateModal);
+      const task = isUpdateModal;
+      setTaskId(task._id);
+      setTitle(task.title);
+      setDescription(task.description);
+      setType(task.type);
     }
-  }, [isUpdateModal, setTaskToUpdate]);
-  const handleSubmit = (e) => {
+  }, [isUpdateModal]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    handleUpdateTask();
-    setIsUpdateModal(false);
+    const taskData = {
+      _id: taskId,
+      title,
+      description,
+      type
+    }
+    await handleUpdateTask(taskData);
+    setIsUpdateModal(null);
   };
+
   return (
     <div className="task-modal-container">
       <div className="task-modal-wrapper">
         <div className="task-modal-header">
           <h4>Update Task</h4>
           <FaTimes
-            onClick={() => setIsUpdateModal("")}
+            onClick={() => setIsUpdateModal(null)}
             size={20}
             title="Cancel operation"
             style={{ cursor: "pointer" }}
@@ -42,8 +49,8 @@ const UpdateTaskModal = ({ isUpdateModal, setIsUpdateModal }) => {
             <input
               id="title"
               type="text"
-              placeholder={title}
-              //   value={title}
+              value={title}
+              placeholder={title || "Enter your new title"}
               onChange={(e) => setTitle(e.target.value)}
               required
             />
@@ -53,7 +60,7 @@ const UpdateTaskModal = ({ isUpdateModal, setIsUpdateModal }) => {
             <input
               id="description"
               type="text"
-              //   placeholder={taskToUpdate.description?.slice(0, 50) + "..."}
+              placeholder={description || "Enter your new description"}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               required
@@ -68,7 +75,7 @@ const UpdateTaskModal = ({ isUpdateModal, setIsUpdateModal }) => {
               required
             >
               <option value="" disabled>
-                {/* {taskToUpdate.type} */}
+                {type || "Select new type"}
               </option>
               <option value="farming">Farming</option>
               <option value="content">Content</option>

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import "../index.css";
 import TaskContext from "../context/TaskProvider";
+import { FaEdit } from "react-icons/fa";
 
 const Tasks = ({ tasks, setIsUpdateModal }) => {
   const [status, setStatus] = useState("not started");
@@ -69,8 +70,8 @@ const Tasks = ({ tasks, setIsUpdateModal }) => {
   }
 
   const handleUpdateTask = (id) => {
-    setTaskToUpdate(id);
-    setIsUpdateModal(id);
+    const taskToUpdate = tasks.find((task) => task._id === id);
+    setIsUpdateModal(taskToUpdate);
   };
   return (
     <>
@@ -104,26 +105,39 @@ const Tasks = ({ tasks, setIsUpdateModal }) => {
         <div className="task-container">
           {filterTasks().length > 0 ? (
             filterTasks().map((task) => (
-              <div
-                className="task-card"
-                key={task._id}
-                onClick={() => handleUpdateTask(task._id)}
-              >
-                <div style={{ display: "flex", columnGap: 10 }}>
-                  <span
-                    className="task-type"
-                    style={{ backgroundColor: getColorForTaskType(task.type) }}
-                  >
-                    {task.type}
-                  </span>
-                  <span
-                    className="task-type"
-                    style={{
-                      backgroundColor: getColorForTaskStatus(task.status),
-                    }}
-                  >
-                    {task.status}
-                  </span>
+              <div className="task-card" key={task._id}>
+                <div
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    height: 20,
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <div style={{ width: "50%", display: "flex", columnGap: 10 }}>
+                    <span
+                      className="task-type"
+                      style={{
+                        backgroundColor: getColorForTaskType(task.type),
+                      }}
+                    >
+                      {task.type}
+                    </span>
+                    <span
+                      className="task-type"
+                      style={{
+                        backgroundColor: getColorForTaskStatus(task.status),
+                      }}
+                    >
+                      {task.status}
+                    </span>
+                  </div>
+                  <div className="edit-task">
+                    <FaEdit
+                      title="Edit task"
+                      onClick={() => handleUpdateTask(task._id)}
+                    />
+                  </div>
                 </div>
                 <p className="task-title">{task.title}</p>
                 <p className="task-description">{task.description}</p>

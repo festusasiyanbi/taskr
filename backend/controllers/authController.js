@@ -46,7 +46,7 @@ const handleLoginUser = async (req, res) => {
 
 const handleSignout = (req, res) => {
     res.clearCookie("t");
-    return res.status("200").json({
+    return res.status(200).json({
         message: "signed out",
     });
 };

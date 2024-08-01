@@ -34,10 +34,11 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: column;
   height: 100%;
   margin-bottom: 2em;
+  padding: 0 1em;
 }
 .task-manager button {
   border-radius: 7px;
@@ -54,9 +55,7 @@
 .task-top-stack h4 {
   padding-left: 10px;
 }
-.operation-wrapper {
-  transition: opacity 3s ease-in-out;
-}
+
 .operation-wrapper > .add-task {
   width: 120px;
   height: 40px;

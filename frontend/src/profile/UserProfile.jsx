@@ -8,13 +8,13 @@ import UpdateTaskModal from "./UpdateTaskModal";
 
 const UserProfile = () => {
   const [isCreateModal, setIsCreateModal] = useState(false);
-  const [isUpdateModal, setIsUpdateModal] = useState("");
+  const [isUpdateModal, setIsUpdateModal] = useState(null);
 
   return (
     <Layout>
       {isCreateModal ? (
         <CreateTaskModal setIsCreateModal={setIsCreateModal} />
-      ) : isUpdateModal !== "" ? (
+      ) : isUpdateModal !== null ? (
         <UpdateTaskModal
           isUpdateModal={isUpdateModal}
           setIsUpdateModal={setIsUpdateModal}

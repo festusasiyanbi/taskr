@@ -89,31 +89,37 @@ export const TaskProvider = ({ children }) => {
       setError(error.message);
     }
   };
-  const handleUpdateTask = async () => {
+  const handleUpdateTask = async (taskData) => {
     const token = localStorage.getItem("token");
     if (!token) {
       setError("User not authenticated");
       return;
     }
-
+  
     try {
-      const response = await fetch("/api/tasks", {
+      const response = await fetch(`/api/tasks/${taskData._id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ type, title, description }),
+        body: JSON.stringify({
+          type: taskData.type,
+          title: taskData.title,
+          description: taskData.description,
+        }),
       });
-
+  
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || "Something went wrong");
       }
-
+  
       const data = await response.json();
       setSuccess(data.message);
-      window.location.reload();
+      setTasks(tasks.map((task) => 
+        task._id === taskData._id ? data.task : task
+      ));
       setType("");
       setTitle("");
       setDescription("");
@@ -122,6 +128,7 @@ export const TaskProvider = ({ children }) => {
       setError(error.message);
     }
   };
+  
 
   const handleDeleteTask = async (id) => {
     const token = localStorage.getItem("token");
@@ -199,15 +206,6 @@ export const TaskProvider = ({ children }) => {
     }
   };
 
-  const setTaskToUpdate = (id) => {
-    const task = tasks.find((task) => task._id === id);
-    if (task) {
-      setTitle(task.title);
-      setDescription(task.description);
-      setType(task.type);
-    }
-  };
-
   useEffect(() => {
     fetchAllTasks();
   }, [user]);
@@ -229,7 +227,7 @@ export const TaskProvider = ({ children }) => {
     handleCompleteTask,
     handleRepeatTask,
     handleDeleteTask,
-    setTaskToUpdate,
+    handleUpdateTask,
   };
   return (
     <TaskContext.Provider value={contextValue}>{children}</TaskContext.Provider>
