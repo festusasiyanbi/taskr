@@ -2,9 +2,17 @@ import React, { useContext, useState } from "react";
 import "../index.css";
 import TaskContext from "../context/TaskProvider";
 
-const Tasks = ({ tasks }) => {
+const Tasks = ({ tasks, setIsUpdateModal }) => {
   const [status, setStatus] = useState("not started");
-  const { loading, error, handleStartTask, handleCompleteTask, handleRepeatTask, handleDeleteTask } = useContext(TaskContext);
+  const {
+    loading,
+    error,
+    handleStartTask,
+    handleCompleteTask,
+    handleRepeatTask,
+    handleDeleteTask,
+    setTaskToUpdate,
+  } = useContext(TaskContext);
   const statuses = [
     { _id: 1, type: "all" },
     { _id: 2, type: "not started" },
@@ -13,9 +21,7 @@ const Tasks = ({ tasks }) => {
   ];
 
   if (!tasks.length) {
-    return (
-      <div>No tasks found</div>
-    );
+    return <div>No tasks found</div>;
   }
   const getColorForTaskType = (type) => {
     const typeColors = {
@@ -41,9 +47,9 @@ const Tasks = ({ tasks }) => {
   const fetchTaskStatus = (status) => {
     setStatus(status);
   };
-  
+
   const filterTasks = () => {
-    if(tasks.length !== 0) {
+    if (tasks.length !== 0) {
       if (status === "all") {
         return tasks;
       } else {
@@ -54,92 +60,104 @@ const Tasks = ({ tasks }) => {
     }
   };
 
-
   if (loading) {
-    return (
-      <div>Loading ...</div>
-    );
+    return <div>Loading ...</div>;
   }
 
   if (error) {
-    return (<div>Error: {error}</div>)
+    return <div>Error: {error}</div>;
   }
 
+  const handleUpdateTask = (id) => {
+    setTaskToUpdate(id);
+    setIsUpdateModal(id);
+  };
   return (
-    <div className="tasks">
-      <div className="status-wrapper">
-        {statuses.map((statusObject) => (
-          <div className="status-div" key={statusObject._id}>
-            <button
-              className="status-type"
-              style={{
-                color:
-                  status === statusObject.type
-                    ? getColorForTaskStatus(statusObject.type)
-                    : "",
-              }}
-              onClick={() => fetchTaskStatus(statusObject.type)}
-            >
-              {statusObject.type}
-            </button>
-            <div
-              style={{
-                backgroundColor:
-                  status === statusObject.type
-                    ? getColorForTaskStatus(statusObject.type)
-                    : "",
-              }}
-            ></div>
-          </div>
-        ))}
-      </div>
-      <div className="task-container">
-        {filterTasks().length > 0 ? (
-          filterTasks().map((task) => (
-            <div className="task-card" key={task._id}>
-              <div style={{ display: "flex", columnGap: 10 }}>
-                <span
-                  className="task-type"
-                  style={{ backgroundColor: getColorForTaskType(task.type) }}
-                >
-                  {task.type}
-                </span>
-                <span
-                  className="task-type"
-                  style={{
-                    backgroundColor: getColorForTaskStatus(task.status),
-                  }}
-                >
-                  {task.status}
-                </span>
-              </div>
-              <p className="task-title">{task.title}</p>
-              <p className="task-description">{task.description}</p>
-              <div style={{width: '100%', display: "flex", columnGap: 10,}}>
-              {task.status === "not started" ? (
-                <button onClick={() => handleStartTask(task._id)}>
-                  Start Task
-                </button>
-              ) : task.status === "in progress" ? (
-                <button onClick={() => handleCompleteTask(task._id)}>
-                  Complete Task
-                </button>
-              ) : (
-                <button onClick={() => handleRepeatTask(task._id)}>
-                  Repeat Task
-                </button>
-              )}
-              <button style={{ backgroundColor: 'red'}} onClick={() => handleDeleteTask(task._id)}>Delete Task</button>
-              </div>
+    <>
+      <div className="tasks">
+        <div className="status-wrapper">
+          {statuses.map((statusObject) => (
+            <div className="status-div" key={statusObject._id}>
+              <button
+                className="status-type"
+                style={{
+                  color:
+                    status === statusObject.type
+                      ? getColorForTaskStatus(statusObject.type)
+                      : "",
+                }}
+                onClick={() => fetchTaskStatus(statusObject.type)}
+              >
+                {statusObject.type}
+              </button>
+              <div
+                style={{
+                  backgroundColor:
+                    status === statusObject.type
+                      ? getColorForTaskStatus(statusObject.type)
+                      : "",
+                }}
+              ></div>
             </div>
-          ))
-        ) : (
-          <p style={{ color: "red", textAlign: "center", width: "100%" }}>
-            No task found!
-          </p>
-        )}
+          ))}
+        </div>
+        <div className="task-container">
+          {filterTasks().length > 0 ? (
+            filterTasks().map((task) => (
+              <div
+                className="task-card"
+                key={task._id}
+                onClick={() => handleUpdateTask(task._id)}
+              >
+                <div style={{ display: "flex", columnGap: 10 }}>
+                  <span
+                    className="task-type"
+                    style={{ backgroundColor: getColorForTaskType(task.type) }}
+                  >
+                    {task.type}
+                  </span>
+                  <span
+                    className="task-type"
+                    style={{
+                      backgroundColor: getColorForTaskStatus(task.status),
+                    }}
+                  >
+                    {task.status}
+                  </span>
+                </div>
+                <p className="task-title">{task.title}</p>
+                <p className="task-description">{task.description}</p>
+                <div style={{ width: "100%", display: "flex", columnGap: 10 }}>
+                  {task.status === "not started" ? (
+                    <button onClick={() => handleStartTask(task._id)}>
+                      Start Task
+                    </button>
+                  ) : task.status === "in progress" ? (
+                    <button onClick={() => handleCompleteTask(task._id)}>
+                      Complete Task
+                    </button>
+                  ) : (
+                    <button onClick={() => handleRepeatTask(task._id)}>
+                      Repeat Task
+                    </button>
+                  )}
+                  <button
+                    style={{ backgroundColor: "red" }}
+                    onClick={() => handleDeleteTask(task._id)}
+                  >
+                    Delete Task
+                  </button>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p style={{ color: "red", textAlign: "center", width: "100%" }}>
+              No task found!
+            </p>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

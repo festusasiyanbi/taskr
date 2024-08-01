@@ -5,10 +5,10 @@ import Tasks from "./Tasks";
 import { PiMagnifyingGlassBold } from "react-icons/pi";
 import TaskContext from "../context/TaskProvider";
 
-const TaskManager = ({ setIsModal }) => {
+const TaskManager = ({ setIsCreateModal, setIsUpdateModal }) => {
   const [toggle, setToggle] = useState(false);
   const [search, setSearch] = useState("");
-  const {tasks} = useContext(TaskContext);
+  const { tasks } = useContext(TaskContext);
 
   const handleToggle = () => {
     setToggle(!toggle);
@@ -17,7 +17,9 @@ const TaskManager = ({ setIsModal }) => {
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
   };
-  const filteredTasks = tasks.filter((task) => task.title.toLowerCase().includes(search.toLowerCase()));
+  const filteredTasks = tasks.filter((task) =>
+    task.title.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div className="task-manager">
@@ -42,10 +44,12 @@ const TaskManager = ({ setIsModal }) => {
           >
             <PiMagnifyingGlassBold />
           </button>
-          <button className="add-task" onClick={() => setIsModal(true)}>+ Add task</button>
+          <button className="add-task" onClick={() => setIsCreateModal(true)}>
+            + Add task
+          </button>
         </div>
       </div>
-      <Tasks tasks={filteredTasks} />
+      <Tasks tasks={filteredTasks} setIsUpdateModal={setIsUpdateModal} />
     </div>
   );
 };

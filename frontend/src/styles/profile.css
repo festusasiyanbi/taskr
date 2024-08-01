@@ -161,6 +161,7 @@
   align-items: flex-start;
   justify-content: space-between;
   padding: 10px 7px;
+  cursor: pointer;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .task-type {
@@ -213,7 +214,8 @@
   align-items: center;
   justify-content: space-between;
 }
-.task-info-div input, .task-info-div select {
+.task-info-div input,
+.task-info-div select {
   width: 70%;
   height: 40px;
   border-radius: 7px;
@@ -228,7 +230,8 @@
 .task-info-div input::placeholder {
   color: black;
 }
-.task-info-div input:focus, .task-info-div select:focus {
+.task-info-div input:focus,
+.task-info-div select:focus {
   border-color: #6200ea;
 }
 .task-modal-wrapper button {

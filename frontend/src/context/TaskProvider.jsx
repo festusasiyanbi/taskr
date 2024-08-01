@@ -1,180 +1,239 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import AuthContext from "./AuthProvider";
 
 const TaskContext = createContext();
 
 export const TaskProvider = ({ children }) => {
-    const [tasks, setTasks] = useState([]);
-    const [type, setType] = useState("");
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [success, setSuccess] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
-    const {user} = useContext(AuthContext);
+  const [tasks, setTasks] = useState([]);
+  const [type, setType] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const { user } = useContext(AuthContext);
 
-    const fetchAllTasks = async () => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            setError('No token found');
-            setLoading(false);
-            return;
-        }
-        try {
-            const response = await fetch('/api/tasks', {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                },
-            });
+  const fetchAllTasks = useCallback(async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setError("No token found");
+      setLoading(false);
+      return;
+    }
+    try {
+      const response = await fetch("/api/tasks", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
-            }
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(
+          errorData.error || `HTTP error! status: ${response.status}`
+        );
+      }
 
-            const data = await response.json();
-            setTasks(data);
-            setLoading(false);
-            setError("");
-        } catch (error) {
-            setError(error.message);
-            setLoading(false);
-        }
+      const data = await response.json();
+      setTasks(data);
+      setLoading(false);
+      setError("");
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  }, []);
+
+  const handlePostTasks = async () => {
+    if (!type || !title || !description) {
+      setError("All fields are required");
+      return;
     }
 
-    const handlePostTasks = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setError("User not authenticated");
+      return;
+    }
 
-        if (!type || !title || !description) {
-            setError('All fields are required');
-            return;
-        }
+    try {
+      const response = await fetch("/api/tasks", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ type, title, description }),
+      });
 
-        const token = localStorage.getItem('token');
-        if (!token) {
-            setError('User not authenticated');
-            return;
-        }
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Something went wrong");
+      }
 
-        try {
-            const response = await fetch('/api/tasks', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-                body: JSON.stringify({ type, title, description }),
-            });
+      const data = await response.json();
+      setSuccess(data.message);
+      window.location.reload();
+      setType("");
+      setTitle("");
+      setDescription("");
+      setError("");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+  const handleUpdateTask = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setError("User not authenticated");
+      return;
+    }
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || 'Something went wrong');
-            }
+    try {
+      const response = await fetch("/api/tasks", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ type, title, description }),
+      });
 
-            const data = await response.json();
-            setSuccess(data.message);
-            window.location.reload();
-            setType('');
-            setTitle('');
-            setDescription('');
-            setError('');
-        } catch (error) {
-            setError(error.message);
-        }
-    };
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Something went wrong");
+      }
 
-    const handleDeleteTask = async (id) => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            setError('User not authenticated');
-            return;
-        }
+      const data = await response.json();
+      setSuccess(data.message);
+      window.location.reload();
+      setType("");
+      setTitle("");
+      setDescription("");
+      setError("");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
-        try {
-            const response = await fetch(`/api/tasks/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                },
-            });
+  const handleDeleteTask = async (id) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setError("User not authenticated");
+      return;
+    }
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || 'Something went wrong');
-            }
+    try {
+      const response = await fetch(`/api/tasks/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-            setTasks(tasks.filter(task => task._id !== id));
-            setError('');
-        } catch (error) {
-            setError(error.message);
-        }
-    };
-    const handleUpdateTaskStatus = async (id, status) => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            console.error('User not authenticated');
-            return;
-        }
-    
-        try {
-            const response = await fetch(`/api/tasks/${id}/status`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-                body: JSON.stringify({ status }),
-            });
-    
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || 'Something went wrong');
-            }
-    
-            const data = await response.json();
-            console.log(data.message);
-            return data.task;
-        } catch (error) {
-            console.error(error.message);
-        }
-    };
-    const handleStartTask = async (id) => {
-        const updatedTask = await handleUpdateTaskStatus(id, 'in progress');
-        if (updatedTask) {
-            setTasks(tasks.map(task => task._id === id ? updatedTask : task));
-        }
-    };
-    
-    const handleCompleteTask = async (id) => {
-        const updatedTask = await handleUpdateTaskStatus(id, 'completed');
-        if (updatedTask) {
-            setTasks(tasks.map(task => task._id === id ? updatedTask : task));
-        }
-    };
-    
-    const handleRepeatTask = async (id) => {
-        const updatedTask = await handleUpdateTaskStatus(id, 'not started');
-        if (updatedTask) {
-            setTasks(tasks.map(task => task._id === id ? updatedTask : task));
-        }
-    };
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Something went wrong");
+      }
 
-    useEffect(() => {
-        fetchAllTasks();
-    }, [user]);
+      setTasks(tasks.filter((task) => task._id !== id));
+      setError("");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+  const handleUpdateTaskStatus = async (id, status) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.error("User not authenticated");
+      return;
+    }
 
-    return (
-        <TaskContext.Provider value={{ 
-            tasks, setTasks, loading, 
-            error, handlePostTasks, type, 
-            setType, title, setTitle, 
-            description, setDescription,
-            success, handleStartTask, handleCompleteTask, 
-            handleRepeatTask, handleDeleteTask
-         }}>
-            {children}
-        </TaskContext.Provider>
-    );
-}
+    try {
+      const response = await fetch(`/api/tasks/${id}/status`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ status }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Something went wrong");
+      }
+
+      const data = await response.json();
+      console.log(data.message);
+      return data.task;
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+  const handleStartTask = async (id) => {
+    const updatedTask = await handleUpdateTaskStatus(id, "in progress");
+    if (updatedTask) {
+      setTasks(tasks.map((task) => (task._id === id ? updatedTask : task)));
+    }
+  };
+
+  const handleCompleteTask = async (id) => {
+    const updatedTask = await handleUpdateTaskStatus(id, "completed");
+    if (updatedTask) {
+      setTasks(tasks.map((task) => (task._id === id ? updatedTask : task)));
+    }
+  };
+
+  const handleRepeatTask = async (id) => {
+    const updatedTask = await handleUpdateTaskStatus(id, "not started");
+    if (updatedTask) {
+      setTasks(tasks.map((task) => (task._id === id ? updatedTask : task)));
+    }
+  };
+
+  const setTaskToUpdate = (id) => {
+    const task = tasks.find((task) => task._id === id);
+    if (task) {
+      setTitle(task.title);
+      setDescription(task.description);
+      setType(task.type);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllTasks();
+  }, [user]);
+
+  const contextValue = {
+    tasks,
+    setTasks,
+    loading,
+    error,
+    handlePostTasks,
+    type,
+    setType,
+    title,
+    setTitle,
+    description,
+    setDescription,
+    success,
+    handleStartTask,
+    handleCompleteTask,
+    handleRepeatTask,
+    handleDeleteTask,
+    setTaskToUpdate,
+  };
+  return (
+    <TaskContext.Provider value={contextValue}>{children}</TaskContext.Provider>
+  );
+};
 
 export default TaskContext;
