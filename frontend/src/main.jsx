@@ -11,6 +11,7 @@ import FourZeroFour from "./components/FourZeroFour.jsx";
 import ProtectedRoute from "./auth/ProtectedRoute.jsx";
 import { AuthProvider } from "./context/AuthProvider.jsx";
 import { TaskProvider } from "./context/TaskProvider.jsx";
+import About from "./components/About"; 
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
     path: "*",
     element: <FourZeroFour />,
   },
+  {
+    path: "/about",
+    element: <About />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

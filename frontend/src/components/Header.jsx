@@ -5,6 +5,7 @@ import "../styles/global.css";
 import AuthContext from "../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
+
 const Header = () => {
   const { user, setUser } = useContext(AuthContext);
   const navigate = useNavigate();

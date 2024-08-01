@@ -3,6 +3,7 @@ import { Container, Row, Col} from "react-bootstrap";
 import "../styles/home.css";
 import "../index.css"
 
+
 const Home = () => {
 
   return (
