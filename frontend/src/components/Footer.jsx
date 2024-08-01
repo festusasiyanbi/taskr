@@ -20,7 +20,7 @@ const Footer = () => {
       github: "https://www.github.com/Geiranix",
     },
     {
-      name: "Kevine AWUDI",
+      name: "Kevine Junior Kodjo AWUDI",
       email: "mailto:wudkevin@icloud.com",
       linkedin: "https://www.linkedin.com/in/kevine-awudi-9b6108271/",
       github: "https://www.github.com/WUDKVN",
