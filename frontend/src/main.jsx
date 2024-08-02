@@ -31,13 +31,13 @@ const router = createBrowserRouter([
     element: <ProtectedRoute />,
   },
   {
+    path: "/about",
+    element: <About />
+  },
+  {
     path: "*",
     element: <FourZeroFour />,
   },
-  {
-    path: "/about",
-    element: <About />
-  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
