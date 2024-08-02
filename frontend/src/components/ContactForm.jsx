@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import Layout from './Layout';
-import '../styles/contact.css';
-import axios from 'axios';
+import React, { useState } from "react";
+import Layout from "./Layout";
+import "../styles/contact.css";
 
 const ContactForm = () => {
+  const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
+    name: "",
+    email: "",
+    message: "",
   });
 
   const handleChange = (e) => {
@@ -17,18 +17,45 @@ const ContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setError("User not authenticated");
+      return;
+    }
+
     try {
-      const response = await axios.post('/api/contact', formData);
-      if (response.data.success) {
-        alert('Email sent successfully!');
-      } else {
-        alert('Failed to send email.');
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Something went wrong");
       }
+
+      const data = await response.json();
+      setSuccess(true);
+      setFormData({
+        name: "",
+        email: "",
+        message: "",
+      });
+      return data;
     } catch (error) {
-      console.error('Error sending email:', error);
-      alert('Error sending email.');
+      console.error("Error sending email:", error.message);
+      setSuccess(false);
     }
   };
+  
+  if (success) {
+    alert("Success: Your message has been successfully sent!");
+  }
 
   return (
     <Layout>
@@ -70,7 +97,9 @@ const ContactForm = () => {
               required
             />
           </div>
-          <button type="submit" className="authBtn btn btn-primary">Send</button>
+          <button type="submit" className="authBtn">
+            Send
+          </button>
         </form>
       </div>
     </Layout>
