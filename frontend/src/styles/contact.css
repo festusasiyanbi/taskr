@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(to right, rgb(12, 13, 50), black);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 20px 0;
+}
+
+form {
+  width: 40%;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 1em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.inputs {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.inputs label {
+  display: block;
+  margin: 5px 0;
+  color: #333;
+  font-weight: 600;
+}
+
+.inputs input,
+.inputs textarea {
+  width: 100%;
+  margin: 5px 0;
+  padding: 10px;
+  color: black;
+  border-radius: 15px; /* Borda mais arredondada */
+  outline: none;
+  border: none;
+  background-color: aliceblue;
+}
+
+.inputs input:focus,
+.inputs textarea:focus {
+  border: 1px solid #6200ea;
+}
+
+.inputs input::placeholder,
+.inputs textarea::placeholder {
+  color: #333;
+  font-weight: 500;
+}
+
+.authBtn {
+  width: 200px;
+  border-radius: 10px;
+  margin: 15px auto;
+}
+
+.alternative-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  column-gap: 10px;
+}
+
+.alternative-div a {
+  text-decoration: none;
+  color: inherit;
+}
+
+@media (max-width: 768px) {
+  form {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  form {
+    padding: 15px;
+  }
+
+  form h2 {
+    font-size: 20px;
+  }
+
+  form p {
+    font-size: 14px;
+  }
+
+  .inputs input,
+  .inputs textarea {
+    padding: 8px;
+  }
+
+  button {
+    padding: 8px;
+    font-size: 14px;
+  }
+}

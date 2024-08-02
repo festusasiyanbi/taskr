@@ -12,6 +12,7 @@ import ProtectedRoute from "./auth/ProtectedRoute.jsx";
 import { AuthProvider } from "./context/AuthProvider.jsx";
 import { TaskProvider } from "./context/TaskProvider.jsx";
 import About from "./components/About"; 
+import ContactForm from "./components/ContactForm.jsx";
 
 const router = createBrowserRouter([
   {
@@ -35,9 +36,12 @@ const router = createBrowserRouter([
     element: <About />
   },
   {
-    path: "*",
-    element: <FourZeroFour />,
+    path: "/contact",
+    element: <ContactForm />
   },
+
+
+  
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
