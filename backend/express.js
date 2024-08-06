@@ -4,6 +4,7 @@ import cors from 'cors';
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import taskRoutes from './routes/taskRoutes.js';
+import contactRoutes from './routes/contactRoutes.js';
 import { fileURLToPath } from 'url';
 
 
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);
 app.use('/api', taskRoutes);
+app.use('/api', contactRoutes);
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({

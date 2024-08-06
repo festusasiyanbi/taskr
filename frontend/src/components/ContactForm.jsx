@@ -1,13 +1,20 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import Layout from './Layout';
 import '../styles/contact.css';
+=======
+import React, { useState } from "react";
+import Layout from "./Layout";
+import "../styles/contact.css";
+>>>>>>> 49eeda28aa15e9fc87677a5df155f4c0dc3e2dfb
 
 const ContactForm = () => {
+  const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
+    name: "",
+    email: "",
+    message: "",
   });
 
   const handleChange = (e) => {
@@ -17,7 +24,15 @@ const ContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setError("User not authenticated");
+      return;
+    }
+
     try {
+<<<<<<< HEAD
       const templateParams = {
         from_name: formData.name,
         from_email: formData.email,
@@ -34,11 +49,39 @@ const ContactForm = () => {
 
       console.log('EmailJS response:', response);
       alert('Email sent successfully!');
+=======
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Something went wrong");
+      }
+
+      const data = await response.json();
+      setSuccess(true);
+      setFormData({
+        name: "",
+        email: "",
+        message: "",
+      });
+      return data;
+>>>>>>> 49eeda28aa15e9fc87677a5df155f4c0dc3e2dfb
     } catch (error) {
-      console.error('Error sending email:', error);
-      alert('Error sending email.');
+      console.error("Error sending email:", error.message);
+      setSuccess(false);
     }
   };
+  
+  if (success) {
+    alert("Success: Your message has been successfully sent!");
+  }
 
   return (
     <Layout>
@@ -80,7 +123,9 @@ const ContactForm = () => {
               required
             />
           </div>
-          <button type="submit" className="authBtn btn btn-primary">Send</button>
+          <button type="submit" className="authBtn">
+            Send
+          </button>
         </form>
       </div>
     </Layout>
