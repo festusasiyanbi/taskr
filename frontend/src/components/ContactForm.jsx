@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import Layout from './Layout';
 import '../styles/contact.css';
-import axios from 'axios';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -18,12 +18,22 @@ const ContactForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/contact', formData);
-      if (response.data.success) {
-        alert('Email sent successfully!');
-      } else {
-        alert('Failed to send email.');
-      }
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+        to_name: 'Your Name' // Pode ser estático ou dinâmico
+      };
+
+      const response = await emailjs.send(
+        'service_l2dgq9d', // Service ID
+        'template_72xnw9c', // Template ID
+        templateParams,
+        'SeKIBOO6XpLegtARZ' //Public Key
+      );
+
+      console.log('EmailJS response:', response);
+      alert('Email sent successfully!');
     } catch (error) {
       console.error('Error sending email:', error);
       alert('Error sending email.');
