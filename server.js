@@ -1,10 +1,21 @@
-import config from "./backend/dbconfig/config.js";
-import mongoose from "mongoose";
-import app from "./backend/express.js";
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import emailRoutes from './backend/routes/emailRoutes.js';
+import config from './dbconfig/config.js';
 
+dotenv.config();
+
+const app = express();
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// Database connection
 mongoose.Promise = global.Promise;
-
-mongoose.connect("mongodb+srv://festusasiyanbi:Festus%40taskr@taskr.rxfwujx.mongodb.net/?retryWrites=true&w=majority&appName=taskr")
+mongoose.connect(config.mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log("MongoDB connected successfully");
     app.listen(config.port, () => {
@@ -21,3 +32,9 @@ mongoose.connection.on('error', err => {
   process.exit(1);
 });
 
+// Routes
+app.use('/api', emailRoutes);
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
