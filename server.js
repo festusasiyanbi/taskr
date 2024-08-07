@@ -2,7 +2,6 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import emailRoutes from './backend/routes/emailRoutes.js';
 import config from './dbconfig/config.js';
 
 dotenv.config();
@@ -32,9 +31,3 @@ mongoose.connection.on('error', err => {
   process.exit(1);
 });
 
-// Routes
-app.use('/api', emailRoutes);
-
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
