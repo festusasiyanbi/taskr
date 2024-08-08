@@ -10,7 +10,7 @@
     "server-debug": "NODE_DEBUG=http,http2 node server.js",
     "start": "concurrently \"nodemon server.js\" \"npm run client\"",
     "client": "cd frontend && npm run dev",
-    "build": "cd frontend && npm install && npm run build && npm install"
+    "build": "npm install --prefix ./frontend && npm run build --prefix ./frontend && npm install"
   },
   "license": "MIT",
   "dependencies": {

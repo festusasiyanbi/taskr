@@ -22,21 +22,20 @@ const ContactForm = () => {
         from_name: formData.name,
         from_email: formData.email,
         message: formData.message,
-        to_name: 'Your Name' // Pode ser estático ou dinâmico
+        to_name: 'CodeFusion Team'
       };
 
       const response = await emailjs.send(
-        'service_l2dgq9d', // Service ID
-        'template_72xnw9c', // Template ID
+        'service_l2dgq9d',
+        'template_72xnw9c',
         templateParams,
-        'SeKIBOO6XpLegtARZ' //Public Key
+        'SeKIBOO6XpLegtARZ'
       );
-
-      console.log('EmailJS response:', response);
       alert('Email sent successfully!');
+      setFormData({name: "", email: "", message: ""});
+      return response;
     } catch (error) {
-      console.error('Error sending email:', error);
-      alert('Error sending email.');
+      alert('Error sending email: ', error);
     }
   };
 
@@ -80,7 +79,7 @@ const ContactForm = () => {
               required
             />
           </div>
-          <button type="submit" className="authBtn btn btn-primary">Send</button>
+          <button type="submit" className="authBtn">Send</button>
         </form>
       </div>
     </Layout>
