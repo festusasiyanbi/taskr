@@ -1,4 +1,4 @@
-# Taskr - Task Management Application
+# Taskr - Task Management Application | [Link to live application](https://taskr-v9iy.onrender.com/)
 
 Taskr is a modern task management application designed to help users efficiently manage their tasks and projects. This application features user authentication, task management, and dynamic task handling. It is built using [Your Stack], with a focus on providing a smooth and intuitive user experience.
 
