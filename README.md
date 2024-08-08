@@ -1,6 +1,6 @@
-# Taskr - Task Management Application | [Link to live application](https://taskr-v9iy.onrender.com/)
+# Taskr - Task Management Application
 
-Taskr is a modern task management application designed to help users efficiently manage their tasks and projects. This application features user authentication, task management, and dynamic task handling. It is built using [Your Stack], with a focus on providing a smooth and intuitive user experience.
+Taskr is a modern task management application designed to help users efficiently manage their tasks and projects. This application features user authentication, task management, and dynamic task handling. It is built using the MERN Stack(MongoDB, ExpressJS, ReactJS, NodeJS), with a focus on providing a smooth and intuitive user experience.
 
 ## Table of Contents
 
@@ -9,7 +9,8 @@ Taskr is a modern task management application designed to help users efficiently
 3. [Usage](#usage)
 4. [API Endpoints](#api-endpoints)
 5. [Contributing](#contributing)
-6. [License](#license)
+6. [Live Application](#live-application)
+7. [License](#license)
 
 ## Features
 
@@ -117,6 +118,9 @@ Contributions are welcome! If you'd like to contribute to Taskr, please follow t
 3. Commit your changes: `git commit -am 'Add new feature'`.
 4. Push to the branch: `git push origin feature-branch`.
 5. Create a new Pull Request.
+
+## Live Application
+[Click to view the live application!](https://taskr-v9iy.onrender.com/)
 
 ## License
 
