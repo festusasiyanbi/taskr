@@ -1,6 +1,4 @@
 import React, { useContext } from "react";
-import "../styles/header.css";
-import "../styles/global.css";
 import AuthContext from "../context/AuthProvider";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 
