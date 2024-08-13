@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import { FaTimes } from "react-icons/fa";
 import TaskContext from "../context/TaskProvider";
+import { useNavigate } from "react-router-dom";
 
 const CreateTaskModal = ({ setIsCreateModal }) => {
+  const navigate = useNavigate();
   const {
     handlePostTasks,
     title,
@@ -16,6 +18,7 @@ const CreateTaskModal = ({ setIsCreateModal }) => {
     e.preventDefault();
     handlePostTasks();
     setIsCreateModal(false);
+    navigate("/user/profile");
   };
   return (
     <div className="task-modal-container">
