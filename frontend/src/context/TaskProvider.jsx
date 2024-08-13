@@ -79,12 +79,12 @@ export const TaskProvider = ({ children }) => {
       }
 
       const data = await response.json();
+      setSuccess(data.message);
       window.location.reload();
       setType("");
       setTitle("");
       setDescription("");
       setError("");
-      return data;
     } catch (error) {
       setError(error.message);
     }

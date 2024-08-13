@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
         };
 
         fetchUser();
-    }, []);
+    }, [user]);
 
     return (
         <AuthContext.Provider value={{ user, setUser, loading, error }}>
